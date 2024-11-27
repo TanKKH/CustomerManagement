@@ -1,1 +1,83 @@
-<p>customer-profile works!</p>
+<div class="customer-form-container">
+    <form [formGroup]="customerForm" (ngSubmit)="onSubmit()" class="form-card">
+      <h2 class="form-title">Customer Profile</h2>
+      
+      <div class="form-group">
+        <label for="firstName" class="form-label">First Name</label>
+        <input 
+          id="firstName"
+          type="text" 
+          formControlName="firstName" 
+          class="form-input"
+          [ngClass]="{'input-error': firstName.invalid && (firstName.dirty || firstName.touched)}"
+        >
+        <div *ngIf="firstName.invalid && (firstName.dirty || firstName.touched)" class="error-container">
+          <small *ngIf="firstName.errors?.['required']" class="error-text">First Name is required</small>
+          <small *ngIf="firstName.errors?.['minlength']" class="error-text">Minimum 3 characters</small>
+        </div>
+      </div>
+  
+      <div class="form-group">
+        <label for="lastName" class="form-label">Last Name</label>
+        <input 
+          id="lastName"
+          type="text" 
+          formControlName="lastName" 
+          class="form-input"
+          [ngClass]="{'input-error': lastName.invalid && (lastName.dirty || lastName.touched)}"
+        >
+        <div *ngIf="lastName.invalid && (lastName.dirty || lastName.touched)" class="error-container">
+          <small *ngIf="lastName.errors?.['required']" class="error-text">Last Name is required</small>
+          <small *ngIf="lastName.errors?.['minlength']" class="error-text">Minimum 3 characters</small>
+        </div>
+      </div>
+  
+      <div class="form-group">
+        <label for="email" class="form-label">Email</label>
+        <input 
+          id="email"
+          type="email" 
+          formControlName="email" 
+          class="form-input"
+          [ngClass]="{'input-error': email.invalid && (email.dirty || email.touched)}"
+        >
+        <div *ngIf="email.invalid && (email.dirty || email.touched)" class="error-container">
+          <small *ngIf="email.errors?.['required']" class="error-text">Email is required</small>
+          <small *ngIf="email.errors?.['email']" class="error-text">Invalid email format</small>
+        </div>
+      </div>
+  
+      <div class="form-group">
+        <label for="dateOfBirth" class="form-label">Date of Birth</label>
+        <input 
+          id="dateOfBirth"
+          type="date" 
+          formControlName="dateOfBirth" 
+          class="form-input"
+          [ngClass]="{'input-error': dateOfBirth.invalid && (dateOfBirth.dirty || dateOfBirth.touched)}"
+        >
+        <div *ngIf="dateOfBirth.invalid && (dateOfBirth.dirty || dateOfBirth.touched)" class="error-container">
+          <small *ngIf="dateOfBirth.errors?.['required']" class="error-text">Date of Birth is required</small>
+          <small *ngIf="dateOfBirth.errors?.['underage']" class="error-text">Must be 18 or older</small>
+        </div>
+      </div>
+  
+      <div class="form-group">
+        <label for="address" class="form-label">Address</label>
+        <textarea 
+          id="address"
+          formControlName="address" 
+          class="form-input form-textarea"
+          [ngClass]="{'input-error': address.invalid && (address.dirty || address.touched)}"
+        ></textarea>
+      </div>
+  
+      <button 
+        type="submit" 
+        class="submit-button"
+        [disabled]="customerForm.invalid"
+      >
+        Submit Profile
+      </button>
+    </form>
+  </div>
